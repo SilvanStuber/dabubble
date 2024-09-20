@@ -1,0 +1,109 @@
+<section>
+  <div class="channel-header">
+    <div>
+      <img src="./assets/img/devscpace-logo.svg" alt="" />
+      <h2>Devspace</h2>
+    </div>
+    <div class="open-new-msg-icon" (click)="openNewMessage()">
+      <mat-icon>edit_square</mat-icon>
+    </div>
+  </div>
+
+  <div class="channels-container">
+    <div>
+      <div class="channels">
+        <div class="titel">
+          <mat-icon (click)="openChannels()">{{ arrowIconChannels }}</mat-icon>
+          <div (click)="openChannels()" class="icon-and-name">
+            <mat-icon>workspaces_outline</mat-icon>
+            <span>Channels</span>
+          </div>
+        </div>
+        <div class="add-icon" (click)="openDialogAddChannel()">
+          <mat-icon>add</mat-icon>
+        </div>
+      </div>
+
+      <div *ngIf="channelListOpen && allChannel.length > 0">
+        <div class="channels" *ngFor="let channel of allChannel; let i = index">
+          <mat-icon></mat-icon>
+          <div class="icon-and-name">
+            <div
+              class="sub-channel active-channel"
+              [ngClass]="{ 'active-channel': channel.id === activeChannelId }"
+              (click)="openChannel(channel); setVariableOpenChat()">
+              <mat-icon>tag</mat-icon>
+              <a>{{ channel.name }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="add-btn-container" *ngIf="channelListOpen">
+        <mat-icon></mat-icon>
+        <div class="icon-and-name-add">
+          <div class="add-channel" (click)="openDialogAddChannel()">
+            <mat-icon>add_circle_outline</mat-icon>
+            <span>Channel hinzufügen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-container">
+    <div class="titel">
+      <mat-icon (click)="openUserList()">{{ arrowIconUser }}</mat-icon>
+      <div (click)="openUserList()" class="icon-and-name">
+        <mat-icon>account_circle_outline</mat-icon>
+        <span>Direktnachrichten</span>
+      </div>
+    </div>
+
+    <div class="user-list" *ngIf="userListOpen">
+      <div
+        class="logged-in-user"
+        class="user"
+        (click)="openDirectChat(currentUser)">
+        <div *ngIf="currentUser" class="user-img">
+          <img
+            referrerpolicy="no-referrer"
+            class="user-avatar"
+            src="{{ currentUser.avatar }}"
+            alt="User Avatar" />
+          <img
+            class="user-status"
+            [src]="
+              currentUser.online
+                ? './assets/img/online-icon.svg'
+                : './assets/img/offline-icon.svg'
+            "
+            alt="Online Status" />
+        </div>
+        <span *ngIf="currentUser">{{ currentUser.name }} (Du)</span>
+      </div>
+      <ng-container *ngFor="let user of mainService.allUsers; let i = index">
+        <div
+          *ngIf="currentUser && user.name !== currentUser.name"
+          class="user"
+          (click)="openDirectChat(user)">
+          <div class="user-img">
+            <img
+              referrerpolicy="no-referrer"
+              class="user-avatar"
+              src="{{ user.avatar }}"
+              alt="User Avatar" />
+            <img
+              class="user-status"
+              [src]="
+                user.online
+                  ? './assets/img/online-icon.svg'
+                  : './assets/img/offline-icon.svg'
+              "
+              alt="Online Status" />
+          </div>
+          <span>{{ user.name }}</span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

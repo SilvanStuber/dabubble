@@ -1,0 +1,91 @@
+<div class="profile-container" (click)="closeDialog()">
+  <div class="user-pofile-dialog" (click)="this.chatService.doNotClose($event)">
+    <div class="headline">
+      <h2>Profil</h2>
+      <div class="close" (click)="closeDialog()">
+        <mat-icon>close</mat-icon>
+      </div>
+    </div>
+    <div class="avatar">
+      <img src="{{ this.chatService.clickedUser.avatar }}" alt="" />
+    </div>
+    <div class="name">
+      <span>{{ this.chatService.clickedUser.name }}</span>
+      <mat-icon
+        (click)="editUserProfile()"
+        class="edit"
+        [ngClass]="{
+          'd-none':
+            this.chatService.clickedUser.id !== this.mainService.loggedInUser.id
+        }">
+        edit
+      </mat-icon>
+    </div>
+    <div class="status">
+      <img src="{{ userStatus }}" />
+    </div>
+    <div class="email">
+      <mat-icon>mail</mat-icon>
+      <div class="email-adresse">
+        <span class="titel">E-Mail-Adresse</span>
+        <span class="adresse">{{ this.chatService.clickedUser.email }}</span>
+      </div>
+    </div>
+    <div
+      class="send-direct-message-container"
+      [ngClass]="{
+        'd-none':
+          this.chatService.clickedUser.id === this.mainService.loggedInUser.id
+      }">
+      <div
+        class="send-direct-message-button"
+        (click)="
+          directMessageService.openDirectMessage(this.chatService.clickedUser);
+          closeDialog()
+        ">
+        <mat-icon>mode_comment</mat-icon>
+        <span>Nachricht</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="editProfileOpen" class="profile-container" (click)="closeDialog()">
+  <div
+    class="edit-user-pofile-dialog"
+    (click)="this.chatService.doNotClose($event)">
+    <div class="headline">
+      <h2>Dein Profil bearbeiten</h2>
+      <div class="close" (click)="closeDialog()">
+        <mat-icon>close</mat-icon>
+      </div>
+    </div>
+    <div class="avatar">
+      <img src="{{ this.chatService.clickedUser.avatar }}" alt="" />
+    </div>
+    <div class="edit-name">
+      <div>
+        <mat-icon class="edit">account_circle</mat-icon>
+        <span>Vollständiger Name</span>
+      </div>
+      <input
+        [(ngModel)]="updateUserName"
+        type="text"
+        placeholder="{{ this.chatService.clickedUser.name }}" />
+    </div>
+    <div class="edit-email">
+      <div>
+        <mat-icon class="edit">mail</mat-icon>
+        <span class="titel">E-Mail-Adresse</span>
+      </div>
+      <input
+        [(ngModel)]="updateUserEmail"
+        type="text"
+        placeholder="{{ this.chatService.clickedUser.email }}" />
+    </div>
+    <div class="edit-btn">
+      <div class="secondary-btn" (click)="closeDialog()">Abbrechen</div>
+      <div class="primary-btn" (click)="updateCurrentUser()">Speichern</div>
+    </div>
+  </div>
+</div>

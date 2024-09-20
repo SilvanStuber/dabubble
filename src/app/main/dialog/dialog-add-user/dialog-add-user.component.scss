@@ -1,0 +1,339 @@
+@import './../../../../styles.scss';
+
+.dialog-add-users-container {
+  position: fixed;
+  right: calc((100vw - 320px) / 2) !important;
+  top: 140px;
+  display: inline-block;
+  background-color: $background-white;
+  border: 1px solid $border-gray;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding-left: 16px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  overflow-y: scroll !important;
+  height: fit-content;
+  min-height: 224px;
+  max-height: calc(100vh - 350px);
+  width: 304px;
+  gap: 8px;
+  z-index: 1200;
+  h2 {
+    font-size: 24px;
+    font-size: 700;
+  }
+}
+
+.dialog-add-users-container-thread-open {
+  position: fixed;
+  right: 28% !important;
+  top: 190px;
+  display: inline-block;
+  background-color: $background-white;
+  border: 1px solid $border-gray;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding-left: 16px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  overflow-y: scroll !important;
+  height: fit-content;
+  min-height: 224px;
+  max-height: calc(100vh - 350px);
+  width: 304px;
+  gap: 8px;
+  z-index: 1200;
+  h2 {
+    font-size: 24px;
+    font-size: 700;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 24px;
+  right: 12px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  &:hover {
+    color: $icon-purple-hover;
+    background-color: $background-lightblue;
+  }
+}
+
+.dialog-add-users {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 4px;
+  p {
+    font-size: 18px;
+    font-weight: 400;
+  }
+}
+
+.dialog-add-icon-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  margin-right: 16px;
+  background-color: $background-lightblue;
+  margin-left: 8px;
+  cursor: pointer;
+  mat-icon {
+    &:hover {
+      color: $background-purple;
+    }
+  }
+}
+
+.dialog-add-users-button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.dialog-add-users-input-container {
+  width: 280px;
+  height: auto;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid $border-gray;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  margin-right: 12px;
+}
+
+.push-addet-user-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  gap: 12px;
+  height: 32px;
+  background-color: $background-lightblue;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  > img {
+    height: 16px;
+    width: 16px;
+    border-radius: 100%;
+  }
+  width: fit-content;
+  margin-left: 8px;
+  margin-top: 4px;
+}
+
+.push-addet-user-container-thread-open {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  gap: 12px;
+  height: 32px;
+  background-color: $background-lightblue;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  > img {
+    height: 16px;
+    width: 16px;
+    border-radius: 100%;
+  }
+  width: fit-content;
+  margin-left: 8px;
+  margin-top: 4px;
+}
+
+.dialog-add-users-close-icon {
+  cursor: pointer;
+}
+
+.push-addet-user-textarea {
+  all: unset;
+  min-width: 90%;
+  max-width: 90%;
+  font-size: 18px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  resize: none;
+  word-wrap: break-word;
+  font-family: Arial, 'TwemojiMozilla';
+  height: 31px;
+  overflow-y: hidden;
+  margin-left: 12px;
+  margin-top: 8px;
+}
+
+.dialog-add-users-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: $background-white;
+  height: 49px;
+  width: 147px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  margin-right: 12px;
+}
+
+.dialog-add-users-button-not-available {
+  background-color: $icon-gray;
+}
+
+.dialog-add-users-button-available {
+  background-color: $icon-blue;
+  cursor: pointer;
+  &:hover {
+    background-color: $background-white;
+    color: $icon-blue;
+    border: 1px solid $icon-blue;
+  }
+}
+
+.dialog-add-users-content-container {
+  position: fixed;
+  top: 265px;
+  max-width: 320px;
+  max-height: calc(100vh - 450px);
+  left: calc((100vw - 260px) / 2) !important;
+  background-color: $background-white;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border: 0.5px solid $border-gray;
+  z-index: 1250;
+}
+
+.dialog-add-users-content-container-thread-open {
+  position: fixed;
+  top: 310px;
+  max-width: 320px;
+  max-height: calc(100vh - 450px);
+  right: 30% !important;
+  background-color: $background-white;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border: 0.5px solid $border-gray;
+  z-index: 1250;
+}
+
+.dialog-add-users-scroll-container {
+  overflow-y: scroll;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  max-height: calc(100vh - 500px);
+}
+
+.dialog-add-users-not-found-container {
+  overflow-y: scroll;
+  max-height: calc(100vh - 500px);
+  > div {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+
+.dialog-add-users-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  height: 58px;
+  max-height: 200px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    gap: 8px;
+    min-width: 200px;
+    margin-left: 8px;
+    margin-right: 8px;
+    p {
+      font-size: 18px;
+      font-weight: 400;
+    }
+    cursor: pointer;
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 100%;
+    }
+    &:hover {
+      background-color: $background-lightblue;
+    }
+  }
+}
+
+@media (max-width: 1279px) {
+  .dialog-add-users-container {
+    right: 18px;
+    bottom: 164px;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .dialog-add-users-container {
+    margin-top: 48px;
+    right: 44px !important;
+  }
+
+  .dialog-add-users-content-container {
+    left: calc(100vw - 335px) !important;
+    top: 304px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .dialog-add-users-container {
+    right: calc((100vw - 343px) / 2);
+    bottom: 164px;
+  }
+}

@@ -1,0 +1,327 @@
+@import './../../../../styles.scss';
+
+.close {
+  cursor: pointer;
+}
+
+.add-channel-dialog {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+  margin: 0;
+  padding: 20px;
+  z-index: 300;
+
+  > .headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  > .create-btn {
+    text-align: right;
+    width: 100%;
+    margin-top: 40px;
+
+    > button {
+      color: white;
+      padding: 12px 25px;
+      gap: 10px;
+      border-radius: 25px;
+      border: unset;
+      background-color: $background-blue;
+    }
+  }
+
+  .input-container2 {
+    margin-top: 30px;
+  }
+
+  .input-container {
+    > h3 span {
+      color: $background-gray;
+      font-weight: 400;
+    }
+
+    > .channel-input div {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      > input {
+        padding: 18px 20px 18px 50px;
+      }
+
+      > .error-msg {
+        color: red;
+        position: absolute;
+        left: 20px;
+        top: 65px;
+      }
+
+      > mat-icon {
+        position: absolute;
+        margin-left: 16px;
+        color: gray;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+.add-user {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 400;
+
+  > .menu-container {
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 26px;
+    border-radius: 30px 30px 0px 0px;
+    box-shadow: 0px -3px 10px 0px #00000033;
+
+    > .border-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 0 0 30px 0;
+
+      > .border {
+        height: 6px;
+        width: 62px;
+        background-color: $background-lightgray;
+        border-radius: 23px;
+      }
+    }
+
+    > .headline {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      > div {
+        display: flex;
+      }
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+}
+
+.create-btn {
+  text-align: right;
+  width: 100%;
+  margin-top: 10px;
+
+  > button {
+    color: white;
+    padding: 12px 25px;
+    gap: 10px;
+    border-radius: 25px;
+    border: unset;
+    background-color: $background-blue;
+  }
+}
+
+.radio-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  > input {
+    height: 20px !important;
+    width: 20px !important;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .add-channel-container {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #796e6e52;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  .add-channel-dialog {
+    position: unset;
+    width: 700px;
+    height: 500px;
+    box-shadow: 0px 6px 10px 0px #00000033;
+    border-radius: 30px;
+  }
+
+  .add-user {
+    position: fixed;
+    height: 100vh;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    > .menu-container {
+      width: 650px;
+      position: unset;
+      border-radius: 30px;
+      z-index: 10000;
+
+      > .border-container {
+        display: none;
+      }
+    }
+  }
+}
+
+/*-----------------------   ADD USER INPUT  -------------------------------------- */
+
+.add-channel-push-addet-user-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  gap: 12px;
+  height: 32px;
+  background-color: $background-lightblue;
+  border-radius: 25px;
+  > img {
+    height: 16px;
+    width: 16px;
+    border-radius: 100%;
+  }
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.add-channel-add-users-close-icon {
+  cursor: pointer;
+}
+
+.add-channel-push-addet-user-textarea {
+  min-width: 90%;
+  max-width: 90%;
+  font-size: 18px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  resize: none;
+  word-wrap: break-word;
+  font-family: Arial, 'TwemojiMozilla', sans-serif;
+  height: 65px;
+  overflow-y: hidden;
+}
+
+.add-channel-user {
+  position: relative;
+}
+
+.add-channel-add-users-content-container {
+  position: absolute;
+  left: 0;
+  max-width: 320px;
+  max-height: 300px;
+  background-color: $background-white;
+  border-radius: 25px;
+  border: 0.5px solid $border-gray;
+  overflow-y: scroll;
+}
+
+.add-channel-add-users-scroll-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  max-height: calc(100vh - 500px);
+}
+
+.add-channel-add-users-not-found-container {
+  overflow-y: scroll;
+  max-height: calc(100vh - 500px);
+  > div {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+
+.add-channel-add-users-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  height: 58px;
+  max-height: 200px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    gap: 8px;
+    min-width: 200px;
+    margin-left: 8px;
+    margin-right: 8px;
+    p {
+      font-size: 18px;
+      font-weight: 400;
+    }
+    cursor: pointer;
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 100%;
+    }
+    &:hover {
+      background-color: $background-lightblue;
+    }
+  }
+}
+
+.d-none {
+  display: none;
+}
+
+.disabled-btn {
+  background-color: $background-lightgray !important;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1279px) {
+  .add-channel-add-users-container {
+    right: 18px;
+    bottom: 164px;
+  }
+}
+
+@media (max-width: 400px) {
+  .add-channel-add-users-container {
+    right: calc((100vw - 343px) / 2);
+    bottom: 164px;
+  }
+}

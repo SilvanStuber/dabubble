@@ -1,0 +1,81 @@
+<header>
+  <img class="logo" src="./assets/img/logo-name.svg" alt="DaBubble logo" />
+
+  <div class="input-and-result-container">
+    <div class="input-container">
+      <input
+        [(ngModel)]="searchValue"
+        (ngModelChange)="searchField.filterData(searchValue)"
+        type="search"
+        placeholder="Code learning durchsuchen" />
+      <mat-icon *ngIf="!searchValue">search</mat-icon>
+    </div>
+
+    <div *ngIf="searchValue" class="result-container">
+      <div *ngIf="searchField.filterUser.length > 0">
+        <p>Benutzer:</p>
+        <div
+          class="user-list-container"
+          *ngFor="let user of searchField.filterUser"
+          (click)="openDirectChat(user)">
+          <img referrerpolicy="no-referrer" src="{{ user['avatar'] }}" alt="" />
+          {{ user['name'] }}
+        </div>
+      </div>
+
+      <div *ngIf="searchField.filterChannel.length > 0">
+        <p>Channel:</p>
+        <div
+          class="user-list-container"
+          *ngFor="let channel of searchField.filterChannel"
+          (click)="openChannel(channel)">
+          <span>#</span>
+          {{ channel['name'] }}
+        </div>
+      </div>
+
+      <div *ngIf="searchField.filterMessage.length > 0">
+        <p>Nachrichten:</p>
+        <div
+          class="user-list-container"
+          *ngFor="let message of searchField.filterMessage"
+          (click)="openChannel(message['channelData'])">
+          [{{ message['channelName'] }}]
+          {{ message['message'] }}
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          searchField.filterChannel.length === 0 &&
+          searchField.filterUser.length === 0 &&
+          searchField.filterMessage.length === 0
+        ">
+        <p>Keine Ergebnisse gefunden.</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="currentUser" class="user-container" (click)="openUserMenu()">
+    <span class="name">{{ currentUser.name }}</span>
+    <div class="user-img">
+      <img
+        class="user-avatar"
+        src="{{ currentUser.avatar }}"
+        alt="User Avatar" />
+      <img
+        class="user-status"
+        src="./assets/img/online-icon-desktop.svg"
+        alt="Online Status" />
+    </div>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </div>
+</header>
+
+<div *ngIf="userMenu" class="user-menu" (click)="openUserMenu()">
+  <div class="menu-container">
+    <span (click)="openUserProfile()">Profile</span>
+    <span (click)="logout()">Logout</span>
+  </div>
+</div>
+

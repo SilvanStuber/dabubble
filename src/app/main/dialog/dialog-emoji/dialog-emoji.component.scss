@@ -1,0 +1,39 @@
+@import '@ctrl/ngx-emoji-mart/picker';
+
+.emoji-container {
+  position: fixed;
+  right: 70px;
+  bottom: 210px;
+  display: inline-block;
+  background: rgba(241, 241, 241, 0.5);
+  z-index: 1400;
+}
+
+.emoji-container-thread-open {
+  position: fixed;
+  right: 29%;
+  bottom: 210px;
+  display: inline-block;
+  background: rgba(241, 241, 241, 0.5);
+}
+
+.emoji-container-open-from-thread {
+  position: fixed;
+  right: 50px;
+  bottom: 210px;
+  display: inline-block;
+  background: rgba(241, 241, 241, 0.5);
+}
+
+@media (max-width: 960px) {
+  .emoji-container {
+    right: 20px;
+    bottom: 164px;
+  }
+}
+
+@media (max-width: 400px) {
+  .emoji-container {
+    right: calc((100vw - 343px) / 2);
+  }
+}

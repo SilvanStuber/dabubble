@@ -1,0 +1,26 @@
+<header *ngIf="currentUser">
+  <img class="logo" src="./assets/img/logo-name.svg" alt="DaBubble logo" />
+  <img
+    (click)="openUserMenu()"
+    class="user"
+    src="{{ currentUser.avatar }}"
+    alt="User avatar" />
+</header>
+
+<div *ngIf="userMenu" class="user-menu" (click)="openUserMenu()">
+  <div class="menu-container" (click)="doNotClose($event)">
+    <div class="border-container">
+      <div class="border"></div>
+    </div>
+    <div>
+      <div class="icon-and-name" (click)="openUserProfile()">
+        <mat-icon>account_circle_outline</mat-icon>
+        <span>Profile</span>
+      </div>
+      <div class="icon-and-name" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </div>
+    </div>
+  </div>
+</div>

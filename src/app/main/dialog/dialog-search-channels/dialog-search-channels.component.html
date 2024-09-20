@@ -1,0 +1,18 @@
+<div
+  [ngClass]="{
+    'dialog-search-channels-container': !this.chatService.isThreadOpen,
+    'dialog-search-channels-container-thread-open':
+      this.chatService.isThreadOpen && this.mainService.contentToChannel,
+    'dialog-search-channels-container-thread-open-from-thread':
+      this.chatService.isThreadOpen && !this.mainService.contentToChannel
+  }">
+  <h2>Channels</h2>
+  <div
+    class="dialog-search-channels-content"
+    *ngFor="let channel of mainService.allChannels; let i = index">
+    <div (click)="addSearchChannel(channel)">
+      <p>{{ channel.name }}</p>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,224 @@
+// Card styles for login, register, create avatar, reset password
+@import './../../../styles.scss';
+
+.card {
+    position: relative;
+    width: 90%;
+    max-width: 570px;
+    padding: 45px 32px;
+    border-radius: 30px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        position: relative;
+    }
+
+    h1 {
+        color: #4952F2;
+        font-size: 32px;
+        margin: 0;
+    }
+
+    p {
+        font-size: 17px;
+        margin: 0;
+    }
+
+    .input-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .form-field {
+            position: relative;
+            display: flex;
+            align-items: center;
+    
+            input {
+                border-radius: 100px;
+                padding: 10px 50px !important;
+                border: 1px solid transparent;
+                background-color: $background-lightblue;
+
+                &:hover {
+                    border: 1px solid #686868;
+                }
+
+                &:focus {
+                    border: 1px solid #535AF1;
+                }
+            }
+    
+            .icon {
+                position: absolute;
+                left: 13px;
+                color: #757575;
+            }
+
+            &:focus-within .icon {
+                color: black;
+            }
+        }
+
+        p {
+            display: flex;
+            justify-content: flex-start;
+            color: #ED1E79;
+            font-size: 13px;
+        }
+        
+    }
+
+    .google-btn {
+        background-color: $background-lightblue;
+        gap: 10px;
+        border-radius: 100px;
+        padding: 6px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: unset;
+        font-weight: 400 !important;
+        color: $background-blue;
+        border: 1px solid transparent;
+
+        img {
+            width: 38px;
+        }
+
+        &:hover {
+            border: 1px solid $background-blue;
+            font-weight: 500 !important;
+        }
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .flexend-btn-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+    }
+}
+
+.arrow-back-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    .arrow-back-icon {
+        cursor: pointer;
+        border-radius: 999px;
+        padding: 4px;
+        position: absolute;
+        left: 0;
+
+        &:hover {
+            background-color: $background-lightblue;
+            color: $background-blue;
+        }
+    }
+
+    h1 {
+        flex: 1;
+        text-align: center;
+        max-width: 80%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.parting-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 400;
+
+    .line {
+        border-bottom: 1px solid $background-purple;
+        width: 100%;
+    }
+}
+
+.forget-register-container {
+    display: flex;
+    justify-content: center;
+}
+
+.forget-password {
+    border-radius: 30px;
+    display: inline-block;
+    width: fit-content;
+    padding: 5px 15px;
+    color: #797EF3;
+
+    &:hover {
+        background-color: #ECEEFE;
+        color: #444DF2;
+        font-weight: 500;
+    }
+}
+
+@media(min-width: 300px) {
+    .card {
+        padding: 20px 10px; 
+
+        .google-btn {
+            padding: 8px 16px; /* Beispielwerte für Google-Btn bei 300px */
+        }
+    }
+
+    button {
+        padding: 8px 16px; /* Beispielwerte für Input bei 300px */
+    }
+
+    input {
+        padding: 8px 16px !important; /* Beispielwerte für Btn bei 300px */
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+}
+
+@media(min-width: 450px) {
+    .card {
+        width: 400px;
+    }
+}
+
+@media(min-width: 756px) {
+    .card {
+        width: 500px;
+        padding: 45px 32px;
+
+        .google-btn {
+            padding: 6px 32px;
+        }
+    }
+
+    button {
+        padding: 12px 25px;
+    }
+
+    input {
+        padding: 13px 32px;
+    }
+
+    h1 {
+        font-size: 46px;
+    }
+
+    .google-btn {
+        margin: 20px 0;
+    }
+}

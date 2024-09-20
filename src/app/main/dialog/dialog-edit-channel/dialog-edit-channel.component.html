@@ -1,0 +1,272 @@
+<div class="edit-channel-container-background">
+  <div class="edit-channel-container">
+    <div class="edit-channel-header">
+      <p>#</p>
+      <p>{{ chatService.dataChannel.name }}</p>
+      <div
+        class="edit-channel-icon edit-channel-icon-close"
+        (click)="channelService.closeEditChannelDialog()">
+        <mat-icon>close</mat-icon>
+      </div>
+    </div>
+    <div
+      class="edit-channel-content-container"
+      [ngClass]="{
+        'edit-channel-content-open-container':
+          !this.channelService.editChannelNameIsOpen
+      }">
+      <div
+        class="edit-channel-name-discription-container"
+        [ngClass]="{
+          'edit-channel-border-discription-container':
+            !this.channelService.editChannelNameIsOpen
+        }">
+        <div
+          class="edit-channel-name-discription-headline"
+          [ngClass]="{
+            'edit-channel-name-discription-headline-bottom':
+              this.channelService.editChannelNameIsOpen
+          }">
+          <span>Channel-Name</span>
+          <div
+            class="edit-channel-icon-mobile edit-channel-icon-desktop"
+            *ngIf="!channelService.editChannelNameIsOpen"
+            (click)="channelService.editChannelName()">
+            <p class="d-none-texte">Bearbeiten</p>
+            <mat-icon class="d-none-icon">edit</mat-icon>
+          </div>
+          <div
+            class="edit-channel-icon"
+            *ngIf="channelService.editChannelNameIsOpen"
+            (click)="channelService.saveChannelName()">
+            <p class="d-none-texte">Speichern</p>
+            <mat-icon class="d-none-icon">check_circle</mat-icon>
+          </div>
+        </div>
+        <div
+          class="edit-channel-name-content"
+          *ngIf="!channelService.editChannelNameIsOpen">
+          <p class="edit-channel-hashtag">#</p>
+          <p class="edit-channel-name">{{ chatService.dataChannel.name }}</p>
+        </div>
+        <div
+          class="edit-channel-name-input-container"
+          *ngIf="channelService.editChannelNameIsOpen">
+          <p>#</p>
+          <textarea
+            [(ngModel)]="channelService.textareaChannelName"
+            name="textareaChannelName"
+            (input)="updateChannelNameContent()"
+            [placeholder]="chatService.dataChannel.name"></textarea>
+        </div>
+      </div>
+      <div
+        class="edit-channel-name-discription-container"
+        [ngClass]="{
+          'edit-channel-border-discription-container':
+            !this.channelService.editChannelDescriptionIsOpen
+        }">
+        <div
+          class="edit-channel-name-discription-headline"
+          [ngClass]="{
+            'edit-channel-name-discription-headline-bottom ':
+              this.channelService.editChannelDescriptionIsOpen
+          }">
+          <span>Beschreibung</span>
+          <div
+            class="edit-channel-icon-mobile edit-channel-icon-desktop"
+            *ngIf="!channelService.editChannelDescriptionIsOpen"
+            (click)="channelService.editChannelDescription()">
+            <p class="d-none-texte">Bearbeiten</p>
+            <mat-icon class="d-none-icon">edit</mat-icon>
+          </div>
+          <div
+            class="edit-channel-icon"
+            *ngIf="channelService.editChannelDescriptionIsOpen"
+            (click)="channelService.saveChannelDescription()">
+            <p class="d-none-texte">Speichern</p>
+            <mat-icon class="d-none-icon">check_circle</mat-icon>
+          </div>
+        </div>
+        <div
+          class="edit-channel-name-content"
+          *ngIf="!channelService.editChannelDescriptionIsOpen">
+          <p class="edit-channel-name">
+            {{ chatService.dataChannel.description }}
+          </p>
+        </div>
+        <div
+          class="edit-channel-description-input-container"
+          *ngIf="channelService.editChannelDescriptionIsOpen">
+          <textarea
+            [(ngModel)]="channelService.textareaChannelDescription"
+            name="textareaChannelDescription"
+            (input)="
+              chatService.adjustHeight($event.target);
+              updateChannelDescriptionContent()
+            "
+            [placeholder]="'Dein Text hier'"></textarea>
+        </div>
+        <div
+          class="edit-channel-description-separating-line"
+          [ngClass]="{
+            'edit-channel-description-open-separating-line':
+              this.channelService.editChannelDescriptionIsOpen
+          }"></div>
+        <div class="edit-channel-owner-container">
+          <p class="edit-channel-owner-description">Erstellt von</p>
+          <p class="edit-channel-owner-name">
+            {{ chatService.dataChannel.ownerUser[0].name }}
+          </p>
+        </div>
+      </div>
+      <div class="edit-channel-members-container">
+        <span>Mitglieder</span>
+        <div
+          class="edit-channel-members-users-content"
+          (click)="
+            directMessageService.openProfil(this.mainService.loggedInUser.id)
+          ">
+          <div>
+            <img [src]="this.mainService.loggedInUser.avatar" />
+            <p>{{ this.mainService.loggedInUser.name }}</p>
+            <p>(Du)</p>
+          </div>
+        </div>
+        <div
+          *ngFor="
+            let user of chatService.dataChannel.channelUsers;
+            let i = index
+          ">
+          <div
+            *ngIf="
+              this.mainService.loggedInUser.id !== user.id ||
+              mainService.loggedInUser.id !== user.id
+            "
+            class="edit-channel-members-users-content"
+            (click)="directMessageService.openProfil(user.id)">
+            <div>
+              <img [src]="user.avatar" />
+              <p>{{ user.name }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="edit-channel-add-users-edit-channel">
+          <div
+            (click)="channelService.editChannelAddUserOpen()"
+            class="edit-channel-add-icon-edit-channel">
+            <mat-icon>person_add</mat-icon>
+          </div>
+          <p>Mitglieder hinzufüngen</p>
+        </div>
+      </div>
+      <div class="edit-channel-remove-users-button-container">
+        <span
+          (click)="channelService.leaveChannel()"
+          class="edit-channel-add-users-button"
+          [ngClass]="{
+            'edit-channel-channel-leave-button':
+              this.channelService.editChannelDescriptionIsOpen
+          }">
+          Channel verlassen
+        </span>
+      </div>
+    </div>
+    <div
+      *ngIf="channelService.editChannelAddUserIsOpen"
+      class="edit-channel-add-user">
+      <div
+        class="edit-channel-menu-container"
+        (click)="chatService.doNotClose($event)">
+        <div class="edit-channel-border-container">
+          <div></div>
+        </div>
+        <div class="edit-channel-add-headline">
+          <h2>Leute hinzufügen</h2>
+          <div
+            class="edit-channel-icon"
+            (click)="channelService.editChannelAddUserClose()">
+            <mat-icon>close</mat-icon>
+          </div>
+        </div>
+
+        <div (click)="channelService.clearInput()">
+          <div
+            class="edit-channel-add-users-input-container"
+            [style.min-height]="
+              this.channelService.textareaHeight + 'px !important'
+            ">
+            <div
+              class="edit-channel-push-addet-user-container"
+              *ngFor="
+                let userAddet of channelService.addetUser;
+                let indexAddUser = index
+              ">
+              <img [src]="userAddet.avatar" />
+              <p>{{ userAddet.name }}</p>
+              <div class="edit-channel-icon">
+                <mat-icon (click)="removeAddUser(userAddet, indexAddUser)">
+                  close
+                </mat-icon>
+              </div>
+            </div>
+            <textarea
+              [(ngModel)]="channelService.content"
+              [class.channelService.placeholder]="channelService.isEmpty"
+              [innerHTML]="channelService.content"
+              name="textarea"
+              (input)="updateContent()"
+              class="edit-channel-push-addet-user-textarea"></textarea>
+          </div>
+          <div class="edit-channel-add-users-button-container">
+            <span
+              (click)="channelService.pushNewUserToChannel()"
+              class="edit-channel-users-button"
+              [ngClass]="{
+                'edit-channel-add-users-button-not-available':
+                  this.channelService.addetUser.length === 0,
+                'edit-channel-add-users-button-available':
+                  this.channelService.addetUser.length > 0
+              }">
+              Hinzufügen
+            </span>
+          </div>
+          <div
+            *ngIf="!this.channelService.isEmpty"
+            class="edit-channel-add-users-content-container">
+            <div
+              class="edit-channel-add-users-not-found-container"
+              *ngIf="channelService.usersNotYetAdded.length === 0">
+              <div>
+                <p>kein Benutzer gefunden</p>
+              </div>
+            </div>
+            <div
+              class="edit-channel-add-users-scroll-container"
+              *ngIf="channelService.usersNotYetAdded.length !== 0">
+              <div
+                class="edit-channel-add-users-content"
+                *ngFor="
+                  let usersNotYetAdded of channelService.usersNotYetAdded;
+                  let indexusersNotYetAdded = index
+                ">
+                <div
+                  (click)="
+                    pushAddetUser(
+                      usersNotYetAdded,
+                      indexusersNotYetAdded,
+                      $event
+                    )
+                  "
+                  *ngIf="channelService.content">
+                  <img [src]="usersNotYetAdded.avatar" />
+                  <p>{{ usersNotYetAdded.name }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

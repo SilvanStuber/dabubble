@@ -1,0 +1,137 @@
+<header>
+  <div class="logo-container" (click)="closeDialog()">
+    <mat-icon>chevron_left</mat-icon>
+    <img
+      class="logo"
+      src="./assets/img/devscpace-logo.svg"
+      alt="DaBubble logo" />
+    <span class="space-name">Devspace</span>
+  </div>
+  <img
+    (click)="openUserMenu()"
+    referrerpolicy="no-referrer"
+    class="user"
+    src="{{ currentUser.avatar }}"
+    alt="User avatar" />
+</header>
+
+<div *ngIf="userMenu" class="user-menu" (click)="openUserMenu()">
+  <div class="menu-container" (click)="doNotClose($event)">
+    <div class="border-container">
+      <div class="border"></div>
+    </div>
+    <div>
+      <div class="icon-and-name" (click)="openUserProfile()">
+        <mat-icon>account_circle_outline</mat-icon>
+        <span>Profile</span>
+      </div>
+      <div class="icon-and-name" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="test">
+  <div class="input-container">
+    <div>
+      <h2>Neue Nachricht</h2>
+      <input
+        [(ngModel)]="newMessageService.searchText"
+        type="search"
+        placeholder="An: #channel, oder @jemand"
+        (ngModelChange)="
+          searchField.filterNewMessage(newMessageService.searchText)
+        " />
+    </div>
+
+    <div class="result-container">
+      <div
+        class="user-content-container content"
+        *ngIf="newMessageService.searchText.startsWith('@')">
+        <div
+          (click)="newMessageService.chooseUser(user['name'], user)"
+          class="user-content"
+          *ngFor="let user of this.mainService.allUsers">
+          <img src="{{ user['avatar'] }}" alt="" />
+          {{ user['name'] }}
+        </div>
+      </div>
+      <div
+        class="user-content-container content"
+        *ngIf="newMessageService.searchText.startsWith('#')">
+        <div
+          (click)="newMessageService.chooseChannel(channel['name'], channel)"
+          class="user-content"
+          *ngFor="let channel of allChannel">
+          {{ channel['name'] }}
+        </div>
+        <div *ngIf="allChannel.length === 0">Keine Ergebnisse vorhanden.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-chat-input-container" id="meinTextarea">
+    <form class="mobile-chat-input-field-container br-20">
+      <div class="add-image-container" *ngIf="newMessageService.imageMessage">
+        <img src="{{ newMessageService.imageMessage }}" alt="" />
+        <div class="delete-img" (click)="chatService.deleteMessage()">
+          <mat-icon>close</mat-icon>
+        </div>
+      </div>
+      <textarea
+        [(ngModel)]="newMessageService.textNewMessage"
+        name="textarea"
+        (input)="chatService.adjustHeight($event.target)"
+        style="min-height: 50px; width: 100%"
+        placeholder="Starte eine neue Nachricht"
+        (ngModelChange)="
+          searchField.filterDataNewMessagechat(newMessageService.textNewMessage)
+        "></textarea>
+
+      <div class="mobile-chat-input-field-icon-container">
+        <div class="mobile-chat-input-icon-container">
+          <div class="mobile-chat-border-right">
+            <div class="mobile-chat-input-icon">
+              <mat-icon>add</mat-icon>
+              <input
+                id="file-upload"
+                type="file"
+                (change)="newMessageService.onFileSelected($event)" />
+            </div>
+          </div>
+          <div class="mobile-chat-input-icon">
+            <mat-icon
+              (click)="
+                chatService.onButtonClick($event); chatService.openDialogEmoji()
+              ">
+              sentiment_satisfied
+            </mat-icon>
+          </div>
+          <div class="mobile-chat-input-icon">
+            <mat-icon
+              (click)="
+                chatService.onButtonClick($event);
+                chatService.openDialogMentionUser()
+              ">
+              alternate_email
+            </mat-icon>
+          </div>
+        </div>
+        <div>
+          <div>
+            <mat-icon
+              (click)="
+                newMessageService.sendMessage(newMessageService.textNewMessage)
+              "
+              class="mobile-chat-send-icon">
+              send
+            </mat-icon>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

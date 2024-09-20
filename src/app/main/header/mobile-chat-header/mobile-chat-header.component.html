@@ -1,0 +1,34 @@
+<header>
+  <div class="logo-container" (click)="closeMobileChat()">
+    <mat-icon>chevron_left</mat-icon>
+    <img
+      class="logo"
+      src="./assets/img/devscpace-logo.svg"
+      alt="DaBubble logo" />
+    <span class="space-name">Devspace</span>
+  </div>
+  <img
+    (click)="openUserMenu()"
+    referrerpolicy="no-referrer"
+    class="user"
+    src="{{ currentUser.avatar }}"
+    alt="User avatar" />
+</header>
+
+<div *ngIf="userMenu" class="user-menu" (click)="openUserMenu()">
+  <div class="menu-container" (click)="doNotClose($event)">
+    <div class="border-container">
+      <div class="border"></div>
+    </div>
+    <div>
+      <div class="icon-and-name" (click)="openUserProfile()">
+        <mat-icon>account_circle_outline</mat-icon>
+        <span>Profile</span>
+      </div>
+      <div class="icon-and-name" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </div>
+    </div>
+  </div>
+</div>

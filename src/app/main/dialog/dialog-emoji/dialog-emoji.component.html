@@ -1,0 +1,15 @@
+<div
+  [ngClass]="{
+    'emoji-container':
+      !this.chatService.isThreadOpen  ,
+    'emoji-container-thread-open':
+      this.chatService.isThreadOpen && this.emojiService.emojiToChannel,
+      'emoji-container-open-from-thread':
+      this.chatService.isThreadOpen && this.emojiService.emojieToThread,  
+  }">
+  <div>
+    <emoji-mart
+      (emojiClick)="addEmoji($event)"
+      class="custom-emoji"></emoji-mart>
+  </div>
+</div>

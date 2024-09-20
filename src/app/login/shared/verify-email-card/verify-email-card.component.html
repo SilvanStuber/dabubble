@@ -1,0 +1,19 @@
+<div class="card">
+    <form class="form-container">
+        <div class="arrow-back-container">
+            <mat-icon routerLink='/login' class="arrow-back-icon" aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon>
+            <h1>Neue E-Mail Adresse bestätigen</h1>
+        </div>
+        <p>Ihre neue E-Mail-Adresse wurde erfolgreich verifiziert. Bitte geben Sie diese erneut ein und bestätigen Sie sie nochmals.</p>
+        <div class="input-fields">
+            <input [(ngModel)]="emailValid" [(ngModel)]="newEmail" #emailValid="ngModel" class="email-input" type="email" placeholder="beispielname@email.com" [ngModelOptions]="{standalone: true}" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+        </div>
+
+        <p>Nach der Bestätigung wirst du zur Login-Seite weitergeleitet, auf der du dich mit deiner neuen E-Mail-Adresse anmelden kannst.</p>
+
+        <div class="flexend-btn-container">
+            <button [disabled]="!emailValid.valid" (click)="verifyEmail($event)" class="primary-btn">Bestätigen</button>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,26 @@
+<section>
+
+    <div class="desktop-login-container">
+        <div class="desktop-login-header">
+            <img src="./../../../assets/img/logo-name.svg" alt="DABubble Logo">
+        </div>
+    
+        <div class="desktop-register-card-container">
+    
+            <app-avatar-card></app-avatar-card>
+    
+        </div>
+    </div>
+    
+    <div  *ngIf="overlayRegistered$ | async" class="overlay">
+        Regestrierung erfolgreich!
+    </div>
+    
+    <div class="impress-policy">
+        <a class="desktop-links" href="#">Datenschutz</a>
+        <a class="desktop-links" href="#">Impressum</a>
+    </div>
+    
+
+</section>
+

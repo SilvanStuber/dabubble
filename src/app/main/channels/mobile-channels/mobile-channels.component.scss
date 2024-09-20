@@ -1,0 +1,246 @@
+@import './../../../../styles.scss';
+
+/**
+ * 
+ * This selector styles the track of the webkit scrollbar.
+ * It adds a top and bottom margin of 20 pixels.
+ */
+::-webkit-scrollbar-track {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+section {
+  height: calc(100vh - 80px);
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: $background-white;
+  overflow: unset !important;
+}
+
+.input-and-result-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.result-container {
+  border-radius: 30px;
+  background-color: #fff;
+  padding: 25px;
+  position: absolute;
+  top: 100%;
+  z-index: 99;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 40vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+
+  p {
+    font-weight: bold;
+  }
+
+  .user-list-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 8px 8px 8px 48px;
+    cursor: pointer;
+    border-radius: 30px;
+
+    &:hover {
+      background-color: $background-lightblue;
+    }
+
+    img {
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 0;
+  margin-top: 80px;
+
+  > input {
+    font-size: 17px;
+    height: 48px;
+    width: 100%;
+    border: 1px solid $background-gray;
+    border-radius: 42px;
+    padding: 8px 24px;
+  }
+
+  > .mat-icon {
+    position: absolute;
+    padding-right: 30px;
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+    color: $background-gray;
+  }
+}
+
+.channels-container {
+  width: 100%;
+}
+
+.channels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 18px;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  > .titel {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:hover {
+      color: $background-blue;
+    }
+
+    > .icon-and-name {
+      width: 100%;
+      padding-left: 24px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+
+  > .icon-and-name {
+    width: 100%;
+    padding-left: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    &:hover {
+      color: $background-blue;
+    }
+
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  > .add-icon {
+    display: flex;
+    text-align: center;
+    padding: 4px;
+    color: $background-blue;
+    &:hover {
+      background-color: $background-lightblue;
+      border-radius: 50px;
+    }
+  }
+}
+
+.sub-channel {
+  > a {
+    color: unset;
+    font-weight: bold;
+    font-size: 17px;
+  }
+}
+
+.add-channel {
+  color: $background-blue;
+  cursor: pointer;
+  > span {
+    font-weight: 400;
+    font-size: 17px;
+  }
+}
+
+.user-container {
+  position: relative;
+  > .titel {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 18px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:hover {
+      color: $background-blue;
+    }
+
+    > .icon-and-name {
+      width: 100%;
+      padding-left: 24px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+
+  > .user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 18px;
+
+    > .user {
+      display: flex;
+      align-items: center;
+      padding-left: 48px;
+      gap: 10px;
+      font-size: 17px;
+
+      > .user-img {
+        display: flex;
+        position: relative;
+
+        > .user-avatar {
+          height: 50px;
+          width: 50px;
+          border-radius: 50px;
+        }
+
+        > .user-status {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.new-msg-icon {
+  position: fixed;
+  right: 16px;
+  height: 60px;
+  width: 60px;
+  bottom: 56px;
+  color: $background-white;
+  background-color: #434df2;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 6px 10px 0px #00000033;
+  cursor: pointer;
+}

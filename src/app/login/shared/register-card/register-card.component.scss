@@ -1,0 +1,14 @@
+@import './../../shared/card-styles.scss';
+@import './../../../../styles.scss';
+
+.agree-policy {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: #42526E;
+
+    input {
+        width: 24px;
+    }
+}

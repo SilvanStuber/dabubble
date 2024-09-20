@@ -1,0 +1,42 @@
+    <div class="card">
+        <form class="form-container" (ngSubmit)="login()" >
+            <h1>Anmelden</h1>
+            <p>Wir empfehlen dir, die E-Mail-Adresse zu nutzen, die du bei der Arbeit verwendest.</p>
+            <div class="input-fields">
+                <div>
+                    <div class="form-field">
+                        <mat-icon class="icon">email</mat-icon>
+                        <input [(ngModel)]="email" class="email-input" type="email" placeholder="beispielname@email.com" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <p *ngIf="wrongEmail" > {{ wrongEmail }} </p>
+                </div>
+                <div>
+                    <div class="form-field">
+                        <mat-icon class="icon">lock</mat-icon>
+                        <input [(ngModel)]="password" type="password" placeholder="Passwort" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <p *ngIf="wrongPassword" > {{ wrongPassword }} </p>
+                </div>
+            </div>
+            <div class="forget-register-container">
+                <a class="forget-password" routerLink="/reset-password" href="#">Passwort vergessen?</a>
+            </div>
+    
+            <div class="parting-line">
+                <div class="line"></div>
+                ODER
+                <div class="line"></div>
+            </div>
+    
+            <button type="button" (click)="loginWithGoogle()" class="google-btn"> 
+                <img src="./assets/icons/google-logo.png" alt=""> 
+                Anmelden mit Google
+            </button>
+    
+            <div class="btn-container">
+                <button type="submit" class="primary-btn">Anmelden</button>
+                <button type="button" class="secondary-btn" (click)="loginAnonymus()">Gäste-Login</button>
+            </div>
+    
+        </form>
+    </div>

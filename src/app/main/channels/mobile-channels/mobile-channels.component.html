@@ -1,0 +1,145 @@
+<section>
+  <div class="input-and-result-container">
+    <div class="input-container">
+      <input
+        [(ngModel)]="searchValue"
+        (ngModelChange)="searchField.filterData(searchValue)"
+        type="search"
+        placeholder="Code learning durchsuchen" />
+      <mat-icon *ngIf="!searchValue">search</mat-icon>
+    </div>
+    <div *ngIf="searchValue" class="result-container">
+      <div *ngIf="searchField.filterUser.length > 0">
+        <p>Benutzer:</p>
+        <div
+          class="user-list-container"
+          *ngFor="let user of searchField.filterUser"
+          (click)="openDirectChat(user)">
+          <img referrerpolicy="no-referrer" src="{{ user['avatar'] }}" alt="" />
+          {{ user['name'] }}
+        </div>
+      </div>
+      <div *ngIf="searchField.filterChannel.length > 0">
+        <p>Channel:</p>
+        <div
+          class="user-list-container"
+          *ngFor="let channel of searchField.filterChannel"
+          (click)="openChannel(channel)">
+          <span>#</span>
+          {{ channel['name'] }}
+        </div>
+      </div>
+      <div *ngIf="searchField.filterMessage.length > 0">
+        <p>Nachrichten:</p>
+        <div
+          class="user-list-container"
+          *ngFor="let message of searchField.filterMessage"
+          (click)="openChannel(message['channelData'])">
+          [{{ message['channelName'] }}]
+          {{ message['message'] }}
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          searchField.filterChannel.length === 0 &&
+          searchField.filterUser.length === 0 &&
+          searchField.filterMessage.length === 0
+        ">
+        <p>Keine Ergebnisse gefunden.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="channels-container">
+    <div>
+      <div class="channels">
+        <div class="titel">
+          <mat-icon (click)="openChannels()">{{ arrowIconChannels }}</mat-icon>
+          <div (click)="openChannels()" class="icon-and-name">
+            <mat-icon>workspaces_outline</mat-icon>
+            <span>Channels</span>
+          </div>
+        </div>
+        <div class="add-icon" (click)="openDialogAddChannel()">
+          <mat-icon>add</mat-icon>
+        </div>
+      </div>
+
+      <div *ngIf="channelListOpen">
+        <div class="channels" *ngFor="let channel of allChannel; let i = index">
+          <mat-icon></mat-icon>
+          <div class="icon-and-name">
+            <div class="sub-channel">
+              <mat-icon>tag</mat-icon>
+              <a (click)="goToCollectionPath(channel, 'chat')">
+                {{ channel.name }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="channels" *ngIf="channelListOpen">
+        <mat-icon></mat-icon>
+        <div class="icon-and-name">
+          <div class="add-channel" (click)="openDialogAddChannel()">
+            <mat-icon>add_circle_outline</mat-icon>
+            <span>Channel hinzufügen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-container">
+    <div class="titel">
+      <mat-icon (click)="openUserList()">{{ arrowIconUser }}</mat-icon>
+      <div (click)="openUserList()" class="icon-and-name">
+        <mat-icon>account_circle_outline</mat-icon>
+        <span>Direktnachrichten</span>
+      </div>
+    </div>
+
+    <div class="user-list" *ngIf="userListOpen">
+      <div
+        class="logged-in-user"
+        class="user"
+        (click)="openDirectChat(currentUser)">
+        <div *ngIf="currentUser" class="user-img">
+          <img class="user-avatar" src="{{ currentUser.avatar }}" />
+          <img
+            class="user-status"
+            [src]="
+              currentUser.online
+                ? './assets/img/online-icon.svg'
+                : './assets/img/offline-icon.svg'
+            " />
+        </div>
+        <span *ngIf="currentUser">{{ currentUser.name }} (Du)</span>
+      </div>
+      <ng-container *ngFor="let user of mainService.allUsers; let i = index">
+        <div
+          *ngIf="currentUser && user.name !== currentUser.name"
+          class="user"
+          (click)="openDirectChat(user)">
+          <div class="user-img">
+            <img class="user-avatar" src="{{ user.avatar }}" />
+            <img
+              class="user-status"
+              [src]="
+                user.online
+                  ? './assets/img/online-icon.svg'
+                  : './assets/img/offline-icon.svg'
+              " />
+          </div>
+          <span>{{ user.name }}</span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="new-msg-icon" (click)="openDialogNewMessage()">
+    <mat-icon>edit_square</mat-icon>
+  </div>
+</section>
+

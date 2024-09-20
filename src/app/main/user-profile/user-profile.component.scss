@@ -1,0 +1,329 @@
+@import './../../../styles.scss';
+
+.profile-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  z-index: 1999;
+  > .user-pofile-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: fixed;
+    right: 20px;
+    left: 20px;
+    background-color: white;
+    margin: 0;
+    padding: 20px 20px 40px 20px;
+    border-radius: 30px;
+    box-shadow: 0px 6px 10px 0px #00000033;
+    > .headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    > .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > img {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+      }
+    }
+
+    > .name {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 32px;
+      font-weight: 700;
+
+      > .edit {
+        background-color: $background-lightblue;
+        border-radius: 50px;
+        padding: 4px;
+      }
+    }
+
+    > .status {
+      font-size: 20px;
+      color: #8fca38;
+    }
+
+    > .email {
+      display: flex;
+      align-items: flex-start;
+      margin-top: 10px;
+      gap: 20px;
+
+      > .email-adresse {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        > .titel {
+          font-size: 20px;
+          font-weight: 700;
+        }
+
+        > .adresse {
+          font-size: 20px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    > .message-btn {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > button {
+        color: white;
+        padding: 12px 25px;
+        gap: 10px;
+        border: unset;
+        border-radius: 25px;
+        position: relative;
+        background-color: $background-blue;
+        display: flex;
+        align-items: center;
+      }
+
+      > mat-icon {
+        position: absolute;
+      }
+    }
+  }
+}
+
+.edit-user-pofile-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: fixed;
+  right: 20px;
+  left: 20px;
+  background-color: white;
+  margin: 0;
+  padding: 20px 20px 40px 20px;
+  border-radius: 30px;
+  box-shadow: 0px 6px 10px 0px #00000033;
+
+  > .headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  > .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    > img {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+    }
+
+    > mat-icon {
+      position: absolute;
+      width: 35%;
+      height: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  > .edit-btn {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    padding-top: 20px;
+
+    > div {
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 30px;
+      padding: 12px 25px;
+      cursor: pointer;
+    }
+  }
+}
+
+.edit-name div {
+  display: flex;
+  justify-content: flex-start;
+  gap: 6px;
+  padding-bottom: 10px;
+  flex-direction: column;
+
+  > .edit {
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+  }
+
+  > span {
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+
+.name-title {
+  flex-direction: row !important;
+}
+
+.email-title {
+  flex-direction: row !important;
+}
+
+.edit-email div {
+  display: flex;
+  justify-content: flex-start;
+  gap: 6px;
+  padding-bottom: 10px;
+  flex-direction: column;
+
+  > .edit {
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+  }
+
+  > span {
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+
+.name-input-validation {
+  color: red;
+  font-size: 14px !important;
+  padding-left: 20px;
+}
+
+.email-input-validation {
+  color: red;
+  font-size: 14px !important;
+  padding-left: 20px;
+}
+
+.send-email-container {
+  .verify-mail {
+    color: #8fca38;
+  }
+
+  .error-mail {
+    color: #ed1e79;
+  }
+}
+
+.primary-btn {
+  background-color: $background-blue !important;
+  color: #fff;
+  border: unset;
+  padding: 12px 25px !important;
+}
+
+.disabled-btn {
+  background-color: $background-lightgray !important;
+  cursor: not-allowed;
+  border: none !important;
+  padding: 12px 25px !important;
+}
+
+@media only screen and (min-width: 960px) {
+  .profile-container {
+    background-color: #8080804f;
+    > .user-pofile-dialog {
+      top: 100px;
+      right: 60px;
+      left: unset;
+      width: 500px;
+      border-radius: 30px 0px 30px 30px;
+      box-shadow: 0px 6px 10px 0px #00000033;
+      padding: 40px;
+    }
+  }
+
+  .close {
+    display: flex;
+    padding: 4px;
+    &:hover {
+      cursor: pointer;
+      border-radius: 50%;
+      color: $background-blue;
+      background-color: $background-lightblue;
+    }
+  }
+
+  .edit-desktop {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    color: $background-blue;
+    padding: 4px;
+
+    &:hover {
+      color: #0311ff;
+    }
+  }
+
+  .edit {
+    display: none;
+  }
+
+  .edit-user-pofile-dialog {
+    top: 100px;
+    right: 60px;
+    left: unset;
+    width: 500px;
+    border-radius: 30px 0px 30px 30px;
+    padding: 40px;
+    background-color: white;
+    margin: 0;
+    box-shadow: 0px 6px 10px 0px #00000033;
+  }
+
+  .edit-user-pofile-dialog {
+    > .avatar {
+      > img {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .edit-desktop {
+    display: none;
+  }
+}
+
+.edit-icon {
+  #file-upload {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+  }
+}

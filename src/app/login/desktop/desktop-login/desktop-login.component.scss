@@ -1,0 +1,85 @@
+@import './../../shared/container-styles.scss';
+@import './../../../../styles.scss';
+@import './../../shared/login-card/login-card.component.scss';
+
+.animation-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #7378F3, #343DE7);
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    gap: 30px;
+    opacity: 1;
+    z-index: 99;
+
+    .logo-container {
+        flex: 0 0 auto;
+    }
+
+    .text-container {
+        overflow: hidden;
+    }
+
+    h1 {
+        color: #fff;
+        font-size: 64px;
+    }
+}
+
+section {
+    height: 100vh;
+    width: 100%;
+    background-color: #eceefe;
+    animation-name: slideIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.desktop-animation-login-header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 75px;
+    padding-left: 75px;
+    padding-right: 75px;
+
+    img {
+        position: absolute; 
+        top: 75px;
+        left: 75px;
+        transform: translate(0, 0);
+        z-index: 1;
+    }
+
+    .register-container {
+        position: relative; 
+        flex: 1;
+        text-align: right; 
+      }
+}
+
+.register-link-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}

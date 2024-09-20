@@ -1,0 +1,151 @@
+<div class="add-channel-container" (click)="closeDialog()">
+  <div
+    class="add-channel-dialog"
+    [ngClass]="{ 'd-none': isAddUserMenuOpen }"
+    (click)="doNotClose($event)">
+    <div class="headline">
+      <h2>Channel erstellen</h2>
+      <div class="close" (click)="closeDialog()">
+        <mat-icon>close</mat-icon>
+      </div>
+    </div>
+    <span>
+      Channels dienen deinem Team zur Kommunikation. Am besten sollten sie
+      themnenbezogen sein #marketing zum Beispiel.
+    </span>
+    <div class="input-container">
+      <h3>Channel-Name</h3>
+      <div class="channel-input">
+        <div>
+          <mat-icon>tag</mat-icon>
+          <input
+            [(ngModel)]="newChannelName"
+            class="inputfield"
+            type="text"
+            placeholder="z.B. Kooperationsprojekte"
+            (input)="checkChannelNames()" />
+          <span *ngIf="this.searchChannelName" class="error-msg">
+            Channelname bereits vorhanden!
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="input-container2">
+      <h3>
+        Beschreibung
+        <span>(optional)</span>
+      </h3>
+      <textarea
+        (input)="ChatService.adjustHeight($event.target)"
+        [(ngModel)]="newChannelDescription"
+        cols="1"
+        rows="1"
+        placeholder="Dein Text hier"></textarea>
+    </div>
+    <div class="create-btn">
+      <button
+        [ngClass]="{
+          'primary-btn': checkName,
+          'disabled-btn': !checkName
+        }"
+        (click)="openAddUserMenu($event)"
+        [disabled]="!checkName">
+        Erstellen
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="addUserMenu" class="add-user">
+    <div class="menu-container" (click)="doNotClose($event)">
+      <div class="border-container">
+        <div class="border"></div>
+      </div>
+      <div class="headline">
+        <h2>Leute hinzufügen</h2>
+        <div class="close" (click)="closeDialog()">
+          <mat-icon>close</mat-icon>
+        </div>
+      </div>
+      <div>
+        <div class="radio-options">
+          <input
+            (click)="addUserInputfieldOff()"
+            type="radio"
+            name="memberSelection"
+            id="all-members"
+            checked />
+          <label for="all-members">
+            Alle Mitglieder zu
+            <span class="text-color-blue">{{ newChannelName }}</span>
+            hinzufügen
+          </label>
+        </div>
+        <div class="radio-options">
+          <input
+            (click)="addUserInputfield()"
+            type="radio"
+            name="memberSelection"
+            id="specific-members" />
+          <label for="specific-members">Bestimmte Leute hinzufügen</label>
+        </div>
+
+        <div class="inputfield" *ngIf="addUserInput">
+          <div
+            class="add-channel-push-addet-user-container"
+            *ngFor="
+              let userAddet of channelService.addetUser;
+              let indexAddUser = index
+            ">
+            <img [src]="userAddet.avatar" alt="User Avatar" />
+            <p>{{ userAddet.name }}</p>
+            <mat-icon
+              class="add-channel-add-users-close-icon"
+              (click)="removeAddUser(userAddet, indexAddUser)">
+              close
+            </mat-icon>
+          </div>
+          <div class="add-channel-user">
+            <input
+              [(ngModel)]="channelService.content"
+              placeholder="Name eingeben"
+              [innerHTML]="channelService.content"
+              name="textarea"
+              (input)="updateContent()"
+              class="add-channel-push-addet-user-textarea" />
+
+            <div
+              *ngIf="!this.channelService.isEmpty"
+              class="add-channel-add-users-content-container"
+              [style.margin-top]="
+                this.channelService.filterContentMarginTop + 'px !important'
+              ">
+              <div class="add-channel-add-users-scroll-container">
+                <div
+                  class="add-channel-add-users-content"
+                  *ngFor="
+                    let usersAll of channelService.filteredUsers;
+                    let indexusersNotYetAdded = index
+                  ">
+                  <div
+                    (click)="
+                      pushAddetUser(usersAll, indexusersNotYetAdded, $event)
+                    "
+                    [ngClass]="{
+                      'd-none': mainService.loggedInUser.id === usersAll.id
+                    }">
+                    <img [src]="usersAll.avatar" alt="User Avatar" />
+                    <p>{{ usersAll.name }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="create-btn">
+          <button class="primary-btn" (click)="addChannel()">Erstellen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="card">
+    <form class="form-container">
+        <div class="arrow-back-container">
+            <mat-icon routerLink='/register' class="arrow-back-icon" aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon>
+            <h1>Wähle deinen Avatar</h1>
+        </div>
+        <div class="profile-container">
+            <img class="profile-img" src="{{ selectedAvatarImage }}" alt="">
+            <h2>Vor- und Nachname </h2>
+        </div>
+
+        <div class="change-avatar-container">
+            <p>Aus der Liste wählen...</p>
+            <div class="avatar-list">
+                <div *ngFor="let user of avatarImg; let i = index">
+                    <img (click)="chooseAvatar(i)" src="{{ user }}" alt="">
+                </div>
+            </div>
+            <div class="upload-img-container">
+                <p>oder eigenes Bild</p>
+                <div class="upload-btn-wrapper">
+                    <button class="secondary-btn">
+                        Hochladen
+                    </button>
+                    <input id="file-upload" type="file" (change)="onFileSelected($event)">
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="flexend-btn-container">
+            <button (click)="saveAndBackToLogin($event)" class="primary-btn">Weiter</button>
+        </div>
+
+    </form>
+</div>
+

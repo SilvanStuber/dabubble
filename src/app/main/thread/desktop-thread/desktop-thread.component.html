@@ -1,0 +1,531 @@
+<div class="desktop-thread-container" (click)="chatService.closeDialog()">
+  <div class="desktop-thread-header-container">
+    <div class="desktop-thread-header-headline">
+      <p class="desktop-thread-header-headline-thread-text">Thread</p>
+      <p class="desktop-thread-header-headline-channel-text">#</p>
+      <p class="desktop-thread-header-headline-channel-text">
+        {{ chatService.dataChannel.name }}
+      </p>
+    </div>
+    <div>
+      <div
+        class="desktop-thread-header-icon"
+        (click)="
+          this.threadService.doNotCloseThread($event);
+          threadService.closeThread()
+        ">
+        <mat-icon>close</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div #scrollContainerThread class="desktop-thread-content">
+    <div
+      (mouseover)="
+        threadService.toggleIconContainerThread(
+          singleThreadMessageIndex,
+          $event
+        )
+      "
+      (mouseleave)="threadService.closeIconContainerThread()"
+      *ngFor="
+        let singleThreadMessage of chatService.dataThread.messageChannel;
+        let singleThreadMessageIndex = index
+      "
+      (click)="threadService.onMouseLeaveThread()"
+      class="desktop-thread-message-single-message"
+      [ngClass]="{
+        'desktop-thread-message-single-message-hover':
+          threadService.activeThreadMessageIndex === singleThreadMessageIndex
+      }">
+      <div
+        class="desktop-thread-edit-message-container"
+        *ngIf="
+          threadService.activeThreadMessageIndex === singleThreadMessageIndex
+        "
+        [ngClass]="{
+          'desktop-thread-edit-message-container-right':
+            chatService.ifMessageFromMe(singleThreadMessage.userId),
+          'desktop-thread-edit-message-container-left':
+            !chatService.ifMessageFromMe(singleThreadMessage.userId)
+        }">
+        <div
+          class="desktop-thread-edit-icon-container"
+          (click)="
+            threadService.ifMessageOwnerMessageFromThread(
+              singleThreadMessageIndex
+            );
+            emojiService.forWhichDocIsTheEmoji('thread');
+            chatService.onButtonClick($event);
+            chatService.openDialogEmojiReactionMessage(singleThreadMessageIndex)
+          ">
+          <mat-icon>add_reaction</mat-icon>
+        </div>
+        <div
+          class="desktop-thread-edit-icon-container"
+          (click)="
+            this.threadService.doNotCloseThread($event);
+            threadService.onMouseEnterThread(singleThreadMessageIndex)
+          "
+          [ngClass]="{
+            'desktop-thread-edit-icon-left': !chatService.ifMessageFromMe(
+              singleThreadMessage.userId
+            )
+          }">
+          <mat-icon>more_vert</mat-icon>
+        </div>
+      </div>
+      <div
+        (mouseenter)="
+          threadService.onMouseEnterThread(singleThreadMessageIndex)
+        "
+        (mouseleave)="threadService.onMouseLeaveThread()"
+        class="desktop-thread-edit-button-container"
+        *ngIf="
+          threadService.hoveredMessageIndexThread === singleThreadMessageIndex
+        ">
+        <span
+          (click)="
+            threadService.toggleEditMessageContainerThread(
+              singleThreadMessageIndex,
+              $event,
+              singleThreadMessage.message
+            )
+          "
+          class="desktop-thread-edit-button">
+          Nachricht bearbeiten
+        </span>
+      </div>
+
+      <div
+        (mouseenter)="threadService.onMouseLeaveThread()"
+        [ngClass]="{
+          'desktop-thread-message-container-from-me':
+            chatService.ifMessageFromMe(singleThreadMessage.userId),
+          'desktop-thread-message-container-from-others':
+            !chatService.ifMessageFromMe(singleThreadMessage.userId),
+          'desktop-thread-message-container-clicked':
+            threadService.activeThreadMessageIndex === singleThreadMessageIndex
+        }">
+        <div
+          (click)="
+            this.threadService.doNotCloseThread($event);
+            directMessageService.openProfil(singleThreadMessage.userId)
+          "
+          (mouseenter)="threadService.onMouseLeaveThread()"
+          class="desktop-thread-message-avatar-container">
+          <img
+            src="{{ singleThreadMessage.userAvatar }}"
+            alt=""
+            referrerpolicy="no-referrer" />
+        </div>
+        <div class="desktop-thread-message-content">
+          <div
+            [ngClass]="{
+              'desktop-thread-message-name-date-container-me':
+                chatService.ifMessageFromMe(singleThreadMessage.userId),
+              'desktop-thread-message-name-date-container-from-others':
+                !chatService.ifMessageFromMe(singleThreadMessage.userId)
+            }">
+            <span
+              (click)="
+                directMessageService.openProfil(singleThreadMessage.userId)
+              "
+              class="desktop-thread-message-name">
+              {{ singleThreadMessage.userName }}
+            </span>
+            <div>
+              <span class="desktop-thread-message-time">
+                {{ chatService.setTime(singleThreadMessage.date) }} Uhr
+              </span>
+            </div>
+          </div>
+          <div
+            (mouseover)="
+              threadService.toggleIconContainerThread(
+                singleThreadMessageIndex,
+                $event
+              )
+            "
+            class="desktop-thread-message-text-container"
+            [ngClass]="{
+              'desktop-thread-message-from-me': chatService.ifMessageFromMe(
+                singleThreadMessage.userId
+              ),
+              'desktop-thread-message-from-others':
+                !chatService.ifMessageFromMe(singleThreadMessage.userId),
+              'desktop-thread-message-clicked':
+                threadService.activeThreadMessageIndex ===
+                singleThreadMessageIndex
+            }">
+            <span
+              *ngIf="
+                threadService.editMessageInputIndexThread !==
+                singleThreadMessageIndex
+              ">
+              {{ singleThreadMessage.message }}
+
+              <div
+                class="image-to-message-container"
+                *ngIf="singleThreadMessage.imageToMessage">
+                <img
+                  (click)="
+                    chatService.openImageMessageDialog(
+                      singleThreadMessage.imageToMessage
+                    )
+                  "
+                  src="{{ singleThreadMessage.imageToMessage }}"
+                  alt="message width" />
+                <a
+                  class="download-icon"
+                  href="{{ singleThreadMessage.imageToMessage }}"
+                  download="">
+                  <mat-icon>download</mat-icon>
+                </a>
+              </div>
+            </span>
+            <div
+              *ngIf="
+                threadService.editMessageIndexThread ===
+                singleThreadMessageIndex
+              ">
+              <textarea
+                [(ngModel)]="threadService.editTextThread"
+                name="newTextarea"
+                (input)="chatService.adjustHeight($event.target)"
+                (focus)="chatService.adjustHeight($event.target)"
+                style="min-height: 100px; width: 100%"
+                class="desktop-thread-message-edit-textarea"></textarea>
+              <div class="desktop-thread-input-field-icon-container">
+                <div class="desktop-thread-edit-message-icon-container">
+                  <div class="desktop-thread-edit-message-icon">
+                    <div class="desktop-thread-input-icon">
+                      <mat-icon
+                        (click)="
+                          threadService.ifMessageOwnerMessageFromThread(
+                            singleThreadMessageIndex
+                          );
+                          emojiService.forWhichDocIsTheEmoji('thread');
+                          chatService.openDialogEmoji();
+                          chatService.onButtonClick($event)
+                        ">
+                        sentiment_satisfied
+                      </mat-icon>
+                    </div>
+                    <div class="desktop-thread-input-icon">
+                      <mat-icon
+                        (click)="
+                          mainService.contentOfWhichInput('thread');
+                          chatService.onButtonClick($event);
+                          chatService.openDialogMentionUser()
+                        ">
+                        alternate_email
+                      </mat-icon>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <div class="desktop-thread-edit-message-save-container">
+                        <p (click)="threadService.closeWithoutSavingThread()">
+                          Abbrechen
+                        </p>
+                        <p
+                          (click)="
+                            threadService.editMessageFromThread(
+                              this.parmsId,
+                              this.threadService.editTextThread,
+                              singleThreadMessageIndex
+                            )
+                          ">
+                          Speichern
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            [ngClass]="{
+              'desktop-thread-message-reaction-right-container':
+                chatService.ifMessageFromMe(singleThreadMessage.userId),
+              'desktop-thread-message-reaction-left-container':
+                !chatService.ifMessageFromMe(singleThreadMessage.userId)
+            }">
+            <div
+              class="desktop-chat-message-reaction-hover-content-container"
+              *ngFor="
+                let emojieThread of chatService.dataThread.messageChannel[
+                  singleThreadMessageIndex
+                ].emojiReaction;
+                let emojiIndexThread = index
+              "
+              (mouseenter)="
+                this.toggleIconHoverContainerThread(
+                  singleThreadMessageIndex,
+                  emojiIndexThread,
+                  $event
+                )
+              "
+              (mouseleave)="this.toggleIconHoverContainerThreadOut($event)">
+              <div
+                [ngClass]="{
+                  'desktop-chat-message-reaction-hover-content-right':
+                    chatService.ifMessageFromMe(singleThreadMessage.userId),
+                  'desktop-chat-message-reaction-hover-content-left':
+                    !chatService.ifMessageFromMe(singleThreadMessage.userId)
+                }"
+                *ngIf="
+                  emojiIndexThread ===
+                    chatService.emojiReactionIndexHoverThread &&
+                  singleThreadMessageIndex ===
+                    chatService.activeMessageIndexReactonThread
+                ">
+                <p class="desktop-chat-message-reaction-hover-emoji">
+                  {{ emojieThread.emoji }}
+                </p>
+                <span
+                  *ngFor="
+                    let emojieUserThread of emojieThread.userName;
+                    let emojiUserIndexThread = index
+                  ">
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length === 1 &&
+                      emojiUserIndexThread === 0
+                    ">
+                    {{ emojieUserThread }}
+                  </p>
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length === 2 &&
+                      emojiUserIndexThread === 0
+                    ">
+                    {{ emojieUserThread }} und
+                  </p>
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length === 2 &&
+                      emojiUserIndexThread === 1
+                    ">
+                    {{ emojieUserThread }}
+                  </p>
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length === 3 &&
+                      emojiUserIndexThread === 0
+                    ">
+                    {{ emojieUserThread }},
+                  </p>
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length === 3 &&
+                      emojiUserIndexThread === 1
+                    ">
+                    {{ emojieUserThread }} und
+                  </p>
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length === 3 &&
+                      emojiUserIndexThread === 2
+                    ">
+                    {{ emojieUserThread }}
+                  </p>
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length > 3 &&
+                      emojiUserIndexThread === 0
+                    ">
+                    {{ emojieUserThread }},
+                  </p>
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length > 3 &&
+                      emojiUserIndexThread === 1
+                    ">
+                    {{ emojieUserThread }},
+                  </p>
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length > 3 &&
+                      emojiUserIndexThread === 2
+                    ">
+                    {{ emojieUserThread }} und
+                  </p>
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length === 4 &&
+                      emojiUserIndexThread === 3
+                    "
+                    class="desktop-chat-message-reaction-hover-link">
+                    {{ emojieThread.userName.length - 3 }} weitere Person
+                  </p>
+                  <p
+                    *ngIf="
+                      emojieThread.userName.length > 4 &&
+                      emojiUserIndexThread === 4
+                    "
+                    class="desktop-chat-message-reaction-hover-link">
+                    {{ emojieThread.userName.length - 3 }} weitere Personen
+                  </p>
+                </span>
+                <p *ngIf="emojieThread.userName.length === 1">hat reagiert</p>
+                <p *ngIf="emojieThread.userName.length > 1">haben reagiert</p>
+              </div>
+              <div
+                (click)="
+                  emojiService.forWhichDocIsTheEmoji('thread');
+                  emojiService.addAdditionalReactionToMessageThread(
+                    emojieThread.emoji,
+                    singleThreadMessageIndex,
+                    emojiIndexThread
+                  )
+                "
+                class="desktop-thread-message-reaction-content"
+                [ngClass]="{
+                  'd-none': emojieThread.user.length === 0
+                }">
+                {{ emojieThread.emoji }} {{ emojieThread.user.length }}
+              </div>
+            </div>
+
+            <div class="desktop-thread-message-reaction-icon">
+              <mat-icon
+                *ngIf="
+                  chatService.editMessageInputIndex !== singleThreadMessageIndex
+                "
+                (click)="
+                  threadService.ifMessageOwnerMessageFromThread(
+                    singleThreadMessageIndex
+                  );
+                  emojiService.forWhichDocIsTheEmoji('thread');
+                  chatService.onButtonClick($event);
+                  chatService.openDialogEmojiReactionMessage(
+                    singleThreadMessageIndex
+                  )
+                ">
+                add_reaction
+              </mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="desktop-thread-separating-line-container"
+        *ngIf="singleThreadMessageIndex === 0">
+        <div class="desktop-thread-separating-line-content">
+          <p
+            *ngIf="
+              this.chatService?.dataChannel?.messageChannel?.[
+                this.chatService.indexOfThreadMessageForEditChatMessage
+              ]?.numberOfMessage === 0
+            ">
+            keine
+          </p>
+          <p
+            *ngIf="
+              this.chatService.dataChannel.messageChannel[
+                this.chatService.indexOfThreadMessageForEditChatMessage
+              ].numberOfMessage > 0
+            ">
+            {{
+              this.chatService.dataChannel.messageChannel[
+                this.chatService.indexOfThreadMessageForEditChatMessage
+              ].numberOfMessage
+            }}
+          </p>
+          <p
+            *ngIf="
+              this.chatService.dataChannel.messageChannel[
+                this.chatService.indexOfThreadMessageForEditChatMessage
+              ].numberOfMessage === 1
+            ">
+            Antwort
+          </p>
+          <p
+            *ngIf="
+              this.chatService.dataChannel.messageChannel[
+                this.chatService.indexOfThreadMessageForEditChatMessage
+              ].numberOfMessage !== 1
+            ">
+            Antworten
+          </p>
+        </div>
+        <div class="desktop-thread-separating-line"></div>
+      </div>
+    </div>
+  </div>
+  <div class="desktop-thread-input-container" id="meinTextarea">
+    <form class="desktop-thread-input-field-container br-20">
+      <div class="add-image-container-width">
+        <div class="add-image-container" *ngIf="threadService.imageMessage">
+          <img src="{{ threadService.imageMessage }}" alt="" />
+          <div class="delete-img" (click)="threadService.deleteMessage()">
+            <mat-icon>close</mat-icon>
+          </div>
+        </div>
+      </div>
+      <textarea
+        (keydown)="checkForEnter($event)"
+        [(ngModel)]="this.threadService.textThread"
+        name="textarea"
+        (input)="chatService.adjustHeight($event.target)"
+        style="min-height: 50px; width: 100%"
+        [placeholder]="'Antworten...'"
+        (ngModelChange)="
+          searchField.filterDataThreadchat(this.threadService.textThread)
+        "></textarea>
+
+      <div class="desktop-thread-input-field-icon-container">
+        <div class="desktop-thread-input-icon-container">
+          <div class="desktop-thread-border-right">
+            <div class="desktop-thread-input-icon">
+              <mat-icon>add</mat-icon>
+              <input
+                id="file-upload"
+                type="file"
+                (change)="threadService.onFileSelected($event)" />
+            </div>
+          </div>
+          <div class="desktop-thread-input-icon">
+            <mat-icon
+              (click)="
+                emojiService.forWhichDocIsTheEmoji('thread');
+                chatService.openDialogEmoji();
+                chatService.onButtonClick($event)
+              ">
+              sentiment_satisfied
+            </mat-icon>
+          </div>
+          <div class="desktop-thread-input-icon">
+            <mat-icon
+              (click)="
+                mainService.contentOfWhichInput('thread');
+                chatService.onButtonClick($event);
+                chatService.openDialogMentionUser()
+              ">
+              alternate_email
+            </mat-icon>
+          </div>
+        </div>
+        <div>
+          <div>
+            <mat-icon
+              (click)="
+                threadService.sendMessageFromThread(
+                  this.chatService.dataThread.id,
+                  this.threadService.textThread,
+                  this.threadService.imageMessage
+                )
+              "
+              class="desktop-thread-send-icon">
+              send
+            </mat-icon>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

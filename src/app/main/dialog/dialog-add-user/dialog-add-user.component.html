@@ -1,0 +1,120 @@
+<div
+  [ngClass]="{
+    'dialog-add-users-container': !this.chatService.isThreadOpen,
+    'dialog-add-users-container-thread-open': this.chatService.isThreadOpen
+  }">
+  <div *ngIf="!this.channelService.addUserClicked">
+    <h2>Mitglieder</h2>
+    <div class="close" (click)="channelService.closeDialogAddUser()">
+      <mat-icon>close</mat-icon>
+    </div>
+    <div
+      class="dialog-add-users-content"
+      *ngFor="let user of chatService.dataChannel.channelUsers; let i = index">
+      <div>
+        <img [src]="user.avatar" alt="User Avatar" />
+        <p>{{ user.name }}</p>
+      </div>
+    </div>
+    <div class="dialog-add-users">
+      <div (click)="openSearchUser()" class="dialog-add-icon-add">
+        <mat-icon>person_add</mat-icon>
+      </div>
+      <p>Mitglieder hinzufügen</p>
+    </div>
+  </div>
+
+  <div *ngIf="this.channelService.addUserClicked">
+    <div
+      [ngClass]="{
+        'dialog-add-users-container': !this.chatService.isThreadOpen,
+        'dialog-add-users-container-thread-open': this.chatService.isThreadOpen
+      }"
+      (click)="channelService.clearInput()">
+      <h2>Leute hinzufügen</h2>
+      <div class="close" (click)="channelService.closePeopleSearch()">
+        <mat-icon>close</mat-icon>
+      </div>
+      <div
+        class="dialog-add-users-input-container"
+        [style.min-height]="
+          this.channelService.textareaHeight + 'px !important'
+        ">
+        <div
+          [ngClass]="{
+            'push-addet-user-container': !this.chatService.isThreadOpen,
+            'push-addet-user-container-thread-open':
+              this.chatService.isThreadOpen
+          }"
+          *ngFor="
+            let userAddet of channelService.addetUser;
+            let indexAddUser = index
+          ">
+          <img [src]="userAddet.avatar" alt="User Avatar" />
+          <p>{{ userAddet.name }}</p>
+          <mat-icon
+            class="dialog-add-users-close-icon"
+            (click)="removeAddUser(userAddet, indexAddUser)">
+            close
+          </mat-icon>
+        </div>
+        <textarea
+          [(ngModel)]="channelService.content"
+          [class.placeholder]="channelService.isEmpty"
+          [innerHTML]="channelService.content"
+          name="textarea"
+          (input)="updateContent()"
+          class="push-addet-user-textarea"></textarea>
+      </div>
+      <div class="dialog-add-users-button-container">
+        <span
+          (click)="channelService.pushNewUserToChannel()"
+          class="dialog-add-users-button"
+          [ngClass]="{
+            'dialog-add-users-button-not-available':
+              channelService.addetUser.length === 0,
+            'dialog-add-users-button-available':
+              channelService.addetUser.length > 0
+          }">
+          Hinzufügen
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="!this.channelService.isEmpty"
+  [ngClass]="{
+    'dialog-add-users-content-container': !this.chatService.isThreadOpen,
+    'dialog-add-users-content-container-thread-open':
+      this.chatService.isThreadOpen
+  }"
+  [style.margin-top]="
+    this.channelService.filterContentMarginTop + 'px !important'
+  ">
+  <div
+    class="dialog-add-users-not-found-container"
+    *ngIf="channelService.usersNotYetAdded.length === 0">
+    <div>
+      <p>kein Benutzer gefunden</p>
+    </div>
+  </div>
+  <div
+    class="dialog-add-users-scroll-container"
+    *ngIf="channelService.usersNotYetAdded.length !== 0">
+    <div
+      class="dialog-add-users-content"
+      *ngFor="
+        let usersNotYetAdded of channelService.usersNotYetAdded;
+        let indexusersNotYetAdded = index
+      ">
+      <div
+        (click)="pushAddetUser(usersNotYetAdded, indexusersNotYetAdded, $event)"
+        *ngIf="channelService.content">
+        <img [src]="usersNotYetAdded.avatar" />
+        <p>{{ usersNotYetAdded.name }}</p>
+      </div>
+    </div>
+  </div>
+</div>

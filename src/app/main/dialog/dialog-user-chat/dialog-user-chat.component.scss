@@ -1,0 +1,232 @@
+@import './../../../../styles.scss';
+
+.profile-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  z-index: 1300;
+  > .user-pofile-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: fixed;
+    top: calc((100vh - 600px) / 4);
+    right: 20px;
+    left: calc((100vw - 500px) / 2);
+    bottom: 20%;
+    background-color: white;
+    margin: 0;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0px 6px 10px 0px #00000033;
+    height: 600px;
+    max-width: 500px;
+    > .headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    > .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > img {
+        height: 200px;
+        border-radius: 100%;
+      }
+    }
+
+    > .name {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 32px;
+      font-weight: 700;
+
+      > .edit {
+        background-color: $background-lightblue;
+        border-radius: 50px;
+        padding: 4px;
+        cursor: pointer;
+        &:hover {
+          color: $icon-purple-hover;
+        }
+      }
+    }
+
+    > .status {
+      font-size: 20px;
+      color: #8fca38;
+    }
+
+    > .email {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+
+      > .email-adresse {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        > .titel {
+          font-size: 20px;
+          font-weight: 700;
+        }
+
+        > .adresse {
+          font-size: 20px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.close {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  &:hover {
+    color: $icon-purple-hover;
+    background-color: $background-lightblue;
+  }
+}
+
+.edit-user-pofile-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: fixed;
+  top: calc((100vh - 600px) / 4);
+  right: 20px;
+  left: 20px;
+  background-color: white;
+  margin: 0;
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0px 6px 10px 0px #00000033;
+
+  > .headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  > .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > img {
+      height: 200px;
+      border-radius: 100%;
+    }
+  }
+
+  > .edit-btn {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    padding-top: 20px;
+    > div {
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 30px;
+      padding: 12px 25px;
+      cursor: pointer;
+    }
+  }
+}
+
+.edit-name div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 10px;
+
+  > .edit {
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+  }
+
+  > span {
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+
+.edit-email div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 10px;
+
+  > .edit {
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+  }
+
+  > span {
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+
+.send-direct-message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.send-direct-message-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 164px;
+  height: 49px;
+  gap: 10px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  background-color: $icon-blue;
+  color: $background-white;
+  cursor: pointer;
+  &:hover {
+    color: $icon-blue;
+    background-color: $background-white;
+    border: 1px solid $icon-blue;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .profile-container {
+    > .user-pofile-dialog {
+      left: calc((100vw - 430px) / 2);
+      max-width: 400px;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .profile-container {
+    > .user-pofile-dialog {
+      left: calc((100vw - 320px) / 2);
+      max-width: 280px;
+    }
+  }
+}

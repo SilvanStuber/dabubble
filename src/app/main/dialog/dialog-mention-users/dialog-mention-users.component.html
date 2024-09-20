@@ -1,0 +1,19 @@
+<div
+  [ngClass]="{
+    'dialog-mention-users-container': !this.chatService.isThreadOpen,
+    'dialog-mention-users-container-thread-open':
+      this.chatService.isThreadOpen && this.mainService.contentToChannel,
+    'dialog-mention-users-container-thread-open-from-thread':
+      this.chatService.isThreadOpen && !this.mainService.contentToChannel
+  }">
+  <h2>Mitglieder</h2>
+  <div
+    class="dialog-mention-users-content"
+    *ngFor="let user of mainService.allUsers; let i = index">
+    <div (click)="addMentionUser(user)">
+      <img referrerpolicy="no-referrer" [src]="user.avatar" />
+      <p>{{ user.name }}</p>
+    </div>
+  </div>
+</div>
+

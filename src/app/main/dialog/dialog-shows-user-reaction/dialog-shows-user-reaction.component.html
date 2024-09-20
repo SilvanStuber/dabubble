@@ -1,0 +1,18 @@
+<div class="dialog-show-users-container">
+  <div class="close" (click)="channelService.closeDialogShowsUserReaction()">
+    <mat-icon>close</mat-icon>
+  </div>
+  <h2>{{ channelService.showEmojiReaction }}</h2>
+  <div
+    *ngFor="
+      let emojiContent of this.channelService.userOfEmoji;
+      let indexOfContent = index
+    ">
+    <div
+      class="dialog-show-users-content"
+      (click)="openUser(channelService.userIdOfEmoji[indexOfContent])">
+      <img [src]="channelService.userAvatarOfEmoji[indexOfContent]" />
+      <p>{{ channelService.userOfEmoji[indexOfContent] }}</p>
+    </div>
+  </div>
+</div>

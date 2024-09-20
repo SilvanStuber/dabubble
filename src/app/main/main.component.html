@@ -1,0 +1,33 @@
+<div class="desktop">
+  <app-desktop-header></app-desktop-header>
+  <div class="main-desktop">
+    <div class="hide-server-sidebar" (click)="closeOpenWorkspace()">
+      <span>{{ chatService.closeMenuText }}</span>
+      <mat-icon>{{ chatService.closeMenu }}</mat-icon>
+    </div>
+    <app-desktop-channels
+      [@slideLeftInOut]="
+        chatService.isWorkspaceOpen ? 'in' : 'out'
+      "></app-desktop-channels>
+    <app-desktop-chat *ngIf="chatService.desktopChatOpen"></app-desktop-chat>
+    <app-desktop-direct-chat
+      *ngIf="chatService.directChatOpen"></app-desktop-direct-chat>
+    <app-desktop-new-message
+      *ngIf="chatService.newMessageOpen"></app-desktop-new-message>
+    <app-desktop-thread
+      [@slideRightInOut]="
+        chatService.isThreadOpen ? 'in' : 'out'
+      "></app-desktop-thread>
+  </div>
+</div>
+
+<div class="mobile">
+  <app-mobile-header></app-mobile-header>
+  <app-mobile-channels
+    *ngIf="
+      !chatService.mobileChatIsOpen && !chatService.mobileDirectChatIsOpen
+    "></app-mobile-channels>
+  <app-mobile-chat *ngIf="chatService.mobileChatIsOpen"></app-mobile-chat>
+  <app-direct-chat *ngIf="chatService.mobileDirectChatIsOpen"></app-direct-chat>
+  <app-mobile-thread *ngIf="chatService.mobileThreadIsOpen"></app-mobile-thread>
+</div>

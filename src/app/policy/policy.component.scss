@@ -1,0 +1,49 @@
+@import './../login/shared/card-styles.scss';
+@import './../login/shared/container-styles.scss';
+
+.imprint-container {
+  background-color: #eceefe;
+}
+
+.imprint {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.imprint-card {
+  position: relative;
+  width: 80%;
+  padding: 45px 32px;
+  border-radius: 30px;
+  background-color: #fff;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    color: #4952f2;
+    font-size: 32px;
+    margin: 0;
+    margin-bottom: 30px;
+  }
+
+  p {
+    font-size: 17px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 756px) {
+  .contact-container {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,26 @@
+<section>
+
+    <div class="login-container">
+        
+        <div class="logo-container">
+            <img src="./assets/img/logo-name.svg" alt="DABubble Logo">
+        </div>
+    
+        <div  *ngIf="overlayNewMail$ | async" class="overlay">
+            <div class="overlay-content">
+                <mat-icon>send</mat-icon>
+                E-Mail gesendet
+            </div> 
+        </div>
+    
+        <app-verify-email-card class="register-card-component"></app-verify-email-card>
+
+        <div class="impress-policy">
+            <a class="desktop-links" href="/policy">Datenschutz</a>
+            <a class="desktop-links" href="/imprint">Impressum</a>
+        </div>
+    
+    </div>
+    
+
+</section>

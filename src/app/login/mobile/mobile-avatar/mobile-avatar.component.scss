@@ -1,0 +1,10 @@
+@import './../../shared/container-styles.scss';
+
+section {
+    background-color: #eceefe;
+    min-height: 100vh;
+    width: 100%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    display: flex;
+}

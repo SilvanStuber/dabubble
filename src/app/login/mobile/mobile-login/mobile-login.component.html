@@ -1,0 +1,32 @@
+<div *ngIf="hideAnimationContainer" [@mobileStartAnimation]="isVisible"
+    (@mobileStartAnimation.done)="toggleToHidden($event)" class="animation-container">
+    <div class="logo-container">
+        <img src="./assets/img/logo.svg" alt="">
+    </div>
+    <div id="headlineMobile" class="text-container hidden">
+        <h1>DABubble</h1>
+    </div>
+</div>
+
+<section *ngIf="showSection" [@mobileSectionAnimation]="isSectionVisible">
+
+    <div class="login-container">
+        <div class="mobile-logo-container logo-container" [@movingLogo]="isLogoMoving">
+            <img class="mobile-login-logo" src="./assets/img/logo-name.svg"
+            alt="DABubble Logo">
+        </div>
+
+        <app-login-card class="login-card-component"></app-login-card>
+
+        <div class="register-container mobile-register-container">
+            Neu bei DABubble?
+            <button class="secondary-btn" (click)="routeToRegister()">Konto erstellen</button>
+        </div>
+
+        <div class="impress-policy">
+            <a class="desktop-links" href="/policy">Datenschutz</a>
+            <a class="desktop-links" href="/imprint">Impressum</a>
+        </div>
+    </div>
+
+</section>

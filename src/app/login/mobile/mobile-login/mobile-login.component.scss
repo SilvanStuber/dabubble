@@ -1,0 +1,85 @@
+@import './../../shared/container-styles.scss';
+
+.animation-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #7378F3, #343DE7);
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    gap: 30px;
+    opacity: 1;
+    z-index: 99;
+
+    .logo-container {
+        flex: 0 0 auto;
+    }
+
+    .text-container {
+        overflow: hidden;
+    }
+
+    h1 {
+        color: #fff;
+        font-size: 40px;
+    }
+
+    img {
+        width: 70px;
+    }
+}
+
+.login-card-component {
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    position: relative;
+}
+
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #eceefe;
+    position: relative;
+    z-index: 1;
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    animation-name: slideIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.animate-login-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}

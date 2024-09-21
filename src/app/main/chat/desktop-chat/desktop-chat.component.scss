@@ -1,11 +1,10 @@
-@import './../../../../styles.scss';
-@import '@ctrl/ngx-emoji-mart/picker';
+@import "./../../../../styles.scss";
+@import "@ctrl/ngx-emoji-mart/picker";
 
 @font-face {
-  font-family: 'TwemojiMozilla';
-  src:
-    local('TwemojiMozilla'),
-    url('../../../../assets/fonts/Twemoji.Mozilla.ttf') format('truetype');
+  font-family: "TwemojiMozilla";
+  src: local("TwemojiMozilla"),
+    url("../../../../assets/fonts/Twemoji.Mozilla.ttf") format("truetype");
 }
 
 /* -----------DESKTOP-------------- */
@@ -464,7 +463,7 @@
     resize: none;
     background-position: right 24px top 16px;
     word-wrap: break-word;
-    font-family: Arial, 'TwemojiMozilla', sans-serif;
+    font-family: Arial, "TwemojiMozilla", sans-serif;
   }
 }
 

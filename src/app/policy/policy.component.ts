@@ -10,4 +10,6 @@ import { RouterLink, RouterModule } from '@angular/router';
   templateUrl: './policy.component.html',
   styleUrl: './policy.component.scss',
 })
-export class PolicyComponent {}
+export class PolicyComponent {
+  mail = "mail@silvanstuber.ch"
+}

@@ -1,13 +1,15 @@
-@import './../login/shared/card-styles.scss';
-@import './../login/shared/container-styles.scss';
+@import "./../login/shared/card-styles.scss";
+@import "./../login/shared/container-styles.scss";
 
 .imprint-container {
   background-color: #eceefe;
+  height: 100vh;
 }
 
 .imprint {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   padding-top: 50px;
   padding-bottom: 50px;

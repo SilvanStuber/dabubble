@@ -81,7 +81,6 @@ export class LoginCardComponent implements OnInit {
 
   async loginAnonymus() {
     const auth = getAuth();
-
     this.email = 'gaeste-login@dabubble.com';
     this.password = 'Gaeste2024';
 

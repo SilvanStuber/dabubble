@@ -1,20 +1,23 @@
-@import './../../../../styles.scss';
-@import '@ctrl/ngx-emoji-mart/picker';
+@import "./../../../../styles.scss";
+@import "@ctrl/ngx-emoji-mart/picker";
 
 @font-face {
-  font-family: 'TwemojiMozilla';
-  src:
-    local('TwemojiMozilla'),
-    url('../../../../assets/fonts/Twemoji.Mozilla.ttf') format('truetype');
+  font-family: "TwemojiMozilla";
+  src: local("TwemojiMozilla"),
+    url("../../../../assets/fonts/Twemoji.Mozilla.ttf") format("truetype");
 }
 
 .dektop-thread-container {
-  background-color: #fff;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  margin-top: 70px;
+  height: calc(100vh - 140px);
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: $background-white;
+  overflow-x: hidden;
 }
 
 /* -----------DESKTOP-------------- */
@@ -414,18 +417,17 @@
 
 .dektop-thread-input-container {
   min-height: 145px;
-  width: 100%;
-  position: absolute;
-  bottom: 12px;
+  width: calc(100vw - 32px);
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 .dektop-thread-input-field-container {
-  width: calc(100% - 50px);
+  width: 100%;
   min-height: 145px;
   padding-top: 4px;
   padding-bottom: 4px;
-  margin-left: 25px;
-  margin-right: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -443,7 +445,7 @@
     resize: none;
     background-position: right 24px top 16px;
     word-wrap: break-word;
-    font-family: Arial, 'TwemojiMozilla';
+    font-family: Arial, "TwemojiMozilla";
   }
 }
 
@@ -573,7 +575,7 @@
   }
 }
 
-@import './../../../../styles.scss';
+@import "./../../../../styles.scss";
 
 header {
   position: fixed;

@@ -1,4 +1,4 @@
-@import './../../../styles.scss';
+@import "./../../../styles.scss";
 
 .profile-container {
   position: fixed;
@@ -137,10 +137,12 @@
       border-radius: 50%;
     }
 
-    > mat-icon {
+    mat-icon {
       position: absolute;
-      width: 35%;
-      height: 60%;
+      padding: 4px;
+      background-color: $background-lightblue;
+      border-radius: 50%;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
       display: flex;
       justify-content: center;
       align-items: center;

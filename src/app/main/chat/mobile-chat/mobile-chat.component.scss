@@ -1,17 +1,17 @@
-@import './../../../../styles.scss';
-@import '@ctrl/ngx-emoji-mart/picker';
+@import "./../../../../styles.scss";
+@import "@ctrl/ngx-emoji-mart/picker";
 
 @font-face {
-  font-family: 'TwemojiMozilla';
-  src:
-    local('TwemojiMozilla'),
-    url('../../../../assets/fonts/Twemoji.Mozilla.ttf') format('truetype');
+  font-family: "TwemojiMozilla";
+  src: local("TwemojiMozilla"),
+    url("../../../../assets/fonts/Twemoji.Mozilla.ttf") format("truetype");
 }
 
 .mobile-chat-container {
-  height: calc(100vh - 80px);
+  height: calc(100vh - 140px);
   width: 100vw;
   position: absolute;
+  top: 80px;
   bottom: 0;
   display: flex;
   justify-content: center;
@@ -418,7 +418,7 @@
     resize: none;
     background-position: right 24px top 16px;
     word-wrap: break-word;
-    font-family: Arial, 'TwemojiMozilla';
+    font-family: Arial, "TwemojiMozilla";
   }
 }
 
